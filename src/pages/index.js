@@ -15,7 +15,7 @@ function HomepageHeader() {
     var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
-      "Bearer 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"
+      "Bearer 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"
     );
 
     var requestOptions = {
