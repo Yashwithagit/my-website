@@ -14,8 +14,8 @@ function HomepageHeader() {
   useEffect(() => {
     var myHeaders = new Headers();
     myHeaders.append(
-      "Authorization",
-      "Bearer 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"
+      "Cookie",
+      "_octo=GH1.1.2052129370.1699438329; logged_in=no"
     );
 
     var requestOptions = {
