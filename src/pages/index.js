@@ -12,13 +12,17 @@ function HomepageHeader() {
   const [data, setData] = useState();
   const { siteConfig } = useDocusaurusContext();
   useEffect(() => {
-    var myHeaders = new Headers();
+    getReadmeFileData();
+  }, []);
+
+  const getReadmeFileData = () => {
+    let myHeaders = new Headers();
     myHeaders.append(
       "Cookie",
       "_octo=GH1.1.2052129370.1699438329; logged_in=no"
     );
 
-    var requestOptions = {
+    let requestOptions = {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -35,7 +39,7 @@ function HomepageHeader() {
         setData(readme);
       })
       .catch((error) => console.error(error));
-  }, []);
+  };
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
@@ -51,7 +55,12 @@ function HomepageHeader() {
             Docusaurus Tutorial - 5min ⏱️
           </Link>
         </div>
-        <pre dangerouslySetInnerHTML={{ __html: data }} />
+
+        <pre
+          className="row"
+          style={{ backgroundColor: "green" }}
+          dangerouslySetInnerHTML={{ __html: data }}
+        />
       </div>
     </header>
   );
