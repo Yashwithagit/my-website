@@ -3,13 +3,12 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-
+// const fs = require("fs");
 import Heading from "@theme/Heading";
 import styles from "./index.module.css";
 import { useEffect, useState } from "react";
 
 function HomepageHeader() {
-  const [data, setData] = useState();
   const { siteConfig } = useDocusaurusContext();
   useEffect(() => {
     getReadmeFileData();
@@ -29,17 +28,32 @@ function HomepageHeader() {
     };
 
     fetch(
-      "https://api.github.com/repos/IBasavaraj/todo-react/readme",
+      "https://raw.githubusercontent.com/Yashwithagit/website-doc/master/docs/tutorial-basics/create-a-page.md",
       requestOptions
     )
-      .then((response) => response.json())
+      .then((response) => response.text())
       .then((result) => {
-        const readme = atob(result.content);
-        console.log(readme);
-        setData(readme);
+        console.log(result);
+        updateFile(result);
       })
       .catch((error) => console.error(error));
   };
+
+  const updateFile = (result) => {
+    // // Fetch the file and update its content
+    // fetch(
+    //   "https://api.github.com/repos/Yashwithagit/website-doc/master/docs/tutorial-basics/create-a-page.md",
+    //   {
+    //     method: "PUT",
+    //     body: result,
+    //   }
+    // )
+    //   .then(() => {
+    //     console.log("File updated successfully");
+    //   })
+    //   .catch((error) => console.error("Error updating file:", error));
+  };
+
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
@@ -55,12 +69,6 @@ function HomepageHeader() {
             Docusaurus Tutorial - 5min ⏱️
           </Link>
         </div>
-
-        <pre
-          className="row"
-          style={{ backgroundColor: "green" }}
-          dangerouslySetInnerHTML={{ __html: data }}
-        />
       </div>
     </header>
   );
